@@ -1,0 +1,16 @@
+
+  Rodar vetorização
+for i in {1..8}; do python3 vetorizacao_codoes.py "../alinhamento (Refseq)/saida/segmento_$i/segmento_${i}_curadas.fasta"; done
+
+   Rodar Kernel 
+
+for i in {1..8}; do 
+  ARQUIVO="../alinhamento (Refseq)/saida/segmento_$i/segmento_${i}_curadas_vetores_RSCU.csv"
+  if [ -f "$ARQUIVO" ]; then
+    # Extrai o primeiro ID da segunda linha do CSV (ignorando o cabeçalho)
+    REF=$(sed -n '2p' "$ARQUIVO" | cut -d',' -f1)
+    echo "====================================================="
+    echo "🚀 Processando Segmento $i usando referência: $REF"
+    python3 kernel_cosseno.py "$ARQUIVO" "$REF"
+  fi
+done   

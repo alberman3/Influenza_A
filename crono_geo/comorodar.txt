@@ -1,0 +1,9 @@
+for i in {1..8}; do 
+  for ARQUIVO in "../alinhamento (Refseq)/saida/segmento_$i/"*kernel_*.csv; do
+    if [ -f "$ARQUIVO" ]; then
+      echo "====================================================="
+      echo "📊 Gerando gráficos e estatísticas para o Segmento $i"
+      python3 rastreamento_crono_geo.py "$ARQUIVO"
+    fi
+  done
+done
